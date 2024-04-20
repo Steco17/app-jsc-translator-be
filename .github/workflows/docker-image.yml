@@ -1,18 +1,20 @@
-name: Docker Image CI
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# Set the working directory in the container
+WORKDIR /app
 
-jobs:
+# Copy the entire application directory into the container
+COPY . /app
 
-  build:
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-    runs-on: ubuntu-latest
+# Expose the port on which your Flask app runs
+EXPOSE 5000
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+# Define environment variable to tell Flask where to find the app
+ENV FLASK_APP=app.py
+
+# Run the application
+ENTRYPOINT FLASK_APP=app.py flask run --host=0.0.0.0
