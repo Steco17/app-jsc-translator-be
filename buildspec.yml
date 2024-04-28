@@ -12,9 +12,9 @@ phases:
       - cd lib
       - zip -r9 ../deployment_package.zip .
       - cd ..
-      - zip -g deployment_package.zip lambda_function.py
+      - zip -g deployment_package.zip app.py
   post_build:
     commands:
-      - echo "Updating lambda Function..."
+      - echo "Updating app ..."
       - aws lambda update-function-code --function-name jsc_translator_be --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
