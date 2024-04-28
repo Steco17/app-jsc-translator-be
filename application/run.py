@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify
+import awsgi
 from application.manage_globals.main import translate
 from application.library.db_languages import global_lang, local_lang
 
@@ -23,6 +24,9 @@ def validate_api_key():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+def lambda_handler(event, context):
+    return awsgi.response(app, event, context, base64_content_types={"image/png"})
 
 @app.route('/languages/global', methods=['GET'])
 def intl_language():
