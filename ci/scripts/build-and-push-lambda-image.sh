@@ -30,4 +30,4 @@ echo Docker Build and Push
 PUSH_TAG=$REGISTRY/${LAMBDA_NAME}:$IMAGE_TAG
 echo $PUSH_TAG
 docker build --build-arg LAMBDA_NAME=${LAMBDA_NAME} -t $IMAGE_TAG --no-cache=true -f $DOCKERFILE .
-# docker push $PUSH_TAG
+docker push $PUSH_TAG

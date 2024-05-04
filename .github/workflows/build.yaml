@@ -1,0 +1,36 @@
+name: Build 2 Tests
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+env:
+  PYTHON_VERSION: 1.21.5
+
+jobs:
+  build:
+    name: Build 
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+    
+      - run: pip install -r requirements.txt
+
+      - name: 
+        run: |
+            chmod +x ci/scripts/build-and-push-all-lambda-image.sh
+            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.ECR_REGISTRY }}
+        
