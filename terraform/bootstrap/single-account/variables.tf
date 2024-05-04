@@ -9,10 +9,10 @@ variable "region" {
 
   validation {
     condition = contains([
-      "us-east1", "us-east4", "us-west1", "us-west2", "us-west3", "us-west4", "us-central1",
-      "northamerica-northeast1", "southamerica-east1", "europe-west1", "europe-west2", "europe-west3",
-      "europe-west4", "europe-west6", "asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2",
-      "asia-northeast3", "asia-southeast1", "asia-southeast2", "australia-southeast1"
+      "us-east-1", "us-east-4", "us-west-1", "us-west-2", "us-west-3", "us-west-4", "us-central-1",
+      "northamerica-northeast-1", "southamerica-east-1", "europe-west1", "europe-west2", "europe-west3",
+      "europe-west4", "europe-west6", "asia-east-1", "asia-east-2", "asia-northeast-1", "asia-northeast-2",
+      "asia-northeast-3", "asia-southeast-1", "asia-southeast-2", "australia-southeast-1"
     ], var.region)
     error_message = "Use an approved region!"
   }

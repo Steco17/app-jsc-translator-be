@@ -59,13 +59,16 @@ export TF_DATA_DIR=$ENV_BOOTSTRAP_DIR/.terraform
 export TF_LOG_PATH=$ENV_BOOTSTRAP_DIR/terraform.log
 export TF_LOG="trace"
 # update statefile reference
-echo $ENVIRONMENT
 sed -e "s|ENVIRONMENT|$ENVIRONMENT|g" "${BOOTSTRAP_MODULE_DIR}/state.tf.template" > state.tf
 
 #  terraform
+pwd
+ls
 terraform init -reconfigure
 terraform validate
-terraform apply -var-file="variables.tfvars" # --auto-approve
+pwd
+ls
+terraform apply -var-file=./variables.tfvars # --auto-approve
 
 # export resources
 export_sate
