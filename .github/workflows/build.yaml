@@ -1,4 +1,4 @@
-name: Build 2 Tests
+name: Build & Push Lambdas 
 on:
   workflow_dispatch:
   pull_request:
@@ -6,11 +6,11 @@ on:
       - main
 
 env:
-  PYTHON_VERSION: 1.21.5
+  PYTHON_VERSION: 3.12.2
 
 jobs:
   build:
-    name: Build 
+    name: Build2Push
     permissions:
       contents: read
       issues: read
@@ -27,10 +27,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
     
-      - run: pip install -r requirements.txt
-
       - name: 
         run: |
             chmod +x ci/scripts/build-and-push-all-lambda-image.sh
             python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.ECR_REGISTRY }}
-        
