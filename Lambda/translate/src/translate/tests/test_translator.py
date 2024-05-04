@@ -1,5 +1,5 @@
 import unittest
-from translate.run import app  # Import your Flask app
+from Lambda.translate.src.run import app  # Import your Flask app
 from translate.manage_globals.main import translate  # Assuming your translation module is named translation_module
 
 class TestTranslation(unittest.TestCase):
