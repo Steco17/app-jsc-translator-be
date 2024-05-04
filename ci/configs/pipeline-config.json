@@ -10,7 +10,7 @@
     "region": "us-east-1",
     "terraform_directory": "terraform",
     "environments": {
-        "dev": {
+        "test": {
             "workspaces": [
                 "default"
             ]

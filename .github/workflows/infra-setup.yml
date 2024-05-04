@@ -1,0 +1,41 @@
+name: Terraform Release Workflow V2
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  AWS_REGION: us-east-2
+
+jobs:
+  terraform-release:
+    name: "Terraform Release"
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./environments
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.1.7
+
+      - name: Verify Terraform version
+        run: terraform --version
+
+      - name: Setup AWS dev credentials
+        run: |
+          aws configure set region ${{ env.AWS_REGION }} --profile dev
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile dev
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile dev
+
+      - name: Terraform Plan
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          python ci/scripts/aws-terraform.py  --config ci/configs/pipeline-config.json --command plan
+
+      - name: Terraform Apply
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          python ci/scripts/aws-terraform.py  --config ci/configs/pipeline-config.json --command apply
