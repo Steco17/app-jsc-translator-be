@@ -31,6 +31,11 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile test
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile test
 
+      - name: Generate TFVars
+        run: |
+          chmod +x ci/scripts/generate_tfvars.sh
+          ci/scripts/generate_tfvars.sh test
+
       - name: Terraform Plan
         if: ${{ github.event_name == 'pull_request' }}
         run: |
