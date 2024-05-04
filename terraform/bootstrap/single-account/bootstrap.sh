@@ -62,12 +62,8 @@ export TF_LOG="trace"
 sed -e "s|ENVIRONMENT|$ENVIRONMENT|g" "${BOOTSTRAP_MODULE_DIR}/state.tf.template" > state.tf
 
 #  terraform
-pwd
-ls
 terraform init -reconfigure
 terraform validate
-pwd
-ls
 terraform apply -var-file=./variables.tfvars # --auto-approve
 
 # export resources
