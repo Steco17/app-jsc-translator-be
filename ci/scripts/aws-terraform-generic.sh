@@ -17,7 +17,7 @@ ENV_NAME=$3
 WORKSPACE=$4
 
 # Get absolute path of terraform environment
-ENV_DIR="$(cd "${TERRAFORM_DIRECTORY}/${ENV_NAME}"; pwd -P)"
+ENV_DIR="$(cd "${TERRAFORM_DIRECTORY}/environments/${ENV_NAME}"; pwd -P)"
 pushd ${ENV_DIR} > /dev/null
 
 # remove previous credentials
@@ -33,7 +33,7 @@ terraform validate
 terraform workspace list
 terraform workspace select $WORKSPACE
 
-terraform ${TERRAFORM_CMD}
+terraform ${TERRAFORM_CMD} -var-file=./variables.tfvars
 
 echo "done setting up ${ENV_NAME}/${WORKSPACE}!"
 popd
