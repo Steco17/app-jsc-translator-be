@@ -19,3 +19,4 @@ variable "lambda_description" {
 }
 
 variable "lambda_image_uri" {}
+variable "image_tag" {}

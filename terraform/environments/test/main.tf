@@ -12,6 +12,7 @@ module "translate-lambda" {
     lambda_name = "translate-${var.env_name}"
     lambda_image_uri = module.translate-ecr.lambda_image_uri
     lambda_description = "Translate API"
+    image_tag = var.image_tag
 
     env = var.env_name
 

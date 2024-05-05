@@ -25,3 +25,11 @@ variable "region" {
     error_message = "Use an approved region!"
   }
 }
+variable "image_tag" {
+  type        = string
+  description = "Translate Lambda Image Tag"
+  validation {
+    condition     = length(var.image_tag) > 0
+    error_message = "image_tag must not be an empty string"
+  }
+}

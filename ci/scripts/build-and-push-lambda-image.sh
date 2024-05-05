@@ -33,8 +33,8 @@ pushd ${LAMBDA_DIR} > /dev/null
 
 # DOCKER BUILD & PUSH
 echo Docker Build and Push
-# PUSH_TAG=$REGISTRY/${LAMBDA_NAME}:$IMAGE_TAG
-PUSH_TAG=$REGISTRY/${LAMBDA_NAME}:latest
+PUSH_TAG=$REGISTRY/${LAMBDA_NAME}:$IMAGE_TAG
+# PUSH_TAG=$REGISTRY/${LAMBDA_NAME}:latest
 echo $PUSH_TAG
 docker build --build-arg LAMBDA_NAME=${LAMBDA_NAME} -t $IMAGE_TAG -t $PUSH_TAG --no-cache=true -f $DOCKERFILE .
 docker push $PUSH_TAG

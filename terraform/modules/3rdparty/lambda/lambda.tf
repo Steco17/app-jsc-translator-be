@@ -6,7 +6,7 @@ module "lambda" {
     function_name = var.lambda_name
     description   = var.lambda_description
 
-    image_uri    = "${var.lambda_image_uri}"
+    image_uri    = "${var.lambda_image_uri}:${var.image_tag}"
     package_type = "Image"
     publish = true
 

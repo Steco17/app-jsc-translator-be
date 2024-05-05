@@ -7,9 +7,9 @@ USAGE="USAGE:
 This script creates variables.tfvars for an environment in 
 ~./environments
 
-${0} <environnment-name>"
+${0} <environnment-name> <image-tag>"
 
-if [[ $# < 1 ]]; then
+if [[ $# -ne 2 ]]; then
     echo "${USAGE}" >&2
     exit 1
 fi
@@ -22,6 +22,7 @@ CONFIG_DIR=$(cd "${SCRIPT_DIR}/../configs"; pwd -P)
 # Get absolute path to environment directory
 ENV_DIR=$(cd "../../terraform/environments/${1}"; pwd -P)
 ENVIRONMENT=$(basename $(cd ${ENV_DIR}; pwd -P))
+IMAGE_TAG=$2
 
 ###  Functions 
 function copy_tfvars(){
@@ -32,7 +33,7 @@ function copy_tfvars(){
 function replace_vars(){
     pushd ${CONFIG_DIR} > /dev/null
     # update vars
-    sed -e "s|ENVIRONMENT|$ENVIRONMENT|g" -e "s|REGION|us-east-1|g"  "variables.tfvars.tpl" > variables.tfvars
+    sed -e "s|ENVIRONMENT|$ENVIRONMENT|g" -e "s|REGION|us-east-1|g" -e "s|IMAGE_TAG|$IMAGE_TAG|g" "variables.tfvars.tpl" > variables.tfvars
     popd
 }
 
