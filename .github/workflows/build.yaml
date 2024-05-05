@@ -7,6 +7,8 @@ on:
 
 env:
   PYTHON_VERSION: 3.12.2
+  AWS_REGION: us-east-2
+  IMAGE_TAG: 20240505.1
 
 jobs:
   build:
@@ -27,7 +29,19 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
     
+      - name: Setup AWS Test credentials
+        run: |
+          aws configure set region ${{ env.AWS_REGION }} --profile test
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile test
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} --profile test
+
+      
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+  
+
       - name: 
         run: |
             chmod +x ci/scripts/build-and-push-all-lambda-image.sh
-            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.ECR_REGISTRY }}
+            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
