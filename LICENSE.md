@@ -38,4 +38,4 @@ This license is effective until terminated. Your rights under this license will 
 
 ### Governing Law:
 
-This license shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+This license shall be governed by and construed following the laws of Centre Region, Cameroon, without regard to its conflict of law provisions.
