@@ -1,5 +1,5 @@
 {
-    "docker_context_directory": ".",
+    "docker_context_directory": "Lambda",
     "docker_file": "Dockerfile",
     "apps": {
         "translate": {

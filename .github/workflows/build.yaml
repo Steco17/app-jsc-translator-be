@@ -7,7 +7,7 @@ on:
 
 env:
   PYTHON_VERSION: 3.12.2
-  AWS_REGION: us-east-2
+  AWS_REGION: us-east-1
   IMAGE_TAG: 20240505.1
 
 jobs:
@@ -38,10 +38,10 @@ jobs:
       
       - name: Login to ECR
         run: |
-          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} --profile test | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
   
 
       - name: 
         run: |
-            chmod +x ci/scripts/build-and-push-all-lambda-image.sh
+            chmod +x ci/scripts/build-and-push-lambda-image.sh
             python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com

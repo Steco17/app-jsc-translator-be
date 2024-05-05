@@ -20,6 +20,7 @@ DOCKERFILE="${6}"
 # Get absolute path of docker files dir
 LAMBDA_DIR="$(cd "${1}"; pwd -P)"
 pushd ${LAMBDA_DIR} > /dev/null
+echo  $LAMBDA_DIR
 
 # # --------------------------------------------------------------LOCAL-----------------------------------------------------------------------------
 # # LOGIN TO ECR
