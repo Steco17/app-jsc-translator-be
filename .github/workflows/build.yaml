@@ -1,6 +1,11 @@
 name: Build & Push Lambdas 
 on:
   workflow_dispatch:
+    inputs:
+      IMAGE_TAG:
+        description: 'Translate Image Tag'
+        required: false
+        default: $(printf -v date '%(%Y%m%d.%H%M)T\n' -1 )
   pull_request:
     branches:
       - main
@@ -8,7 +13,8 @@ on:
 env:
   PYTHON_VERSION: 3.12.2
   AWS_REGION: us-east-1
-  IMAGE_TAG: 20240505.1
+  IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+  # IMAGE_TAG: 20240505.1
 
 jobs:
   build:
