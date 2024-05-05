@@ -1,11 +1,11 @@
 name: Build & Push Lambdas 
 on:
   workflow_dispatch:
-    inputs:
-      IMAGE_TAG:
-        description: 'Translate Image Tag'
-        required: false
-        default: $(printf -v date '%(%Y%m%d.%H%M)T\n' -1 )
+    # inputs:
+    #   IMAGE_TAG:
+    #     description: 'Translate Image Tag'
+    #     required: false
+    #     default: $(date + '%Y%m%d.%H%M')
   pull_request:
     branches:
       - main
@@ -13,7 +13,7 @@ on:
 env:
   PYTHON_VERSION: 3.12.2
   AWS_REGION: us-east-1
-  IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+  # IMAGE_TAG: $(date + '%Y%m%d.%H%M')
   # IMAGE_TAG: 20240505.1
 
 jobs:
@@ -46,8 +46,13 @@ jobs:
         run: |
           aws ecr get-login-password --region ${{ env.AWS_REGION }} --profile test | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
   
+          
+      - name: Eval TAG
+        run: |
+            echo "IMAGE_TAG_EVAL=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
+            echo $IMAGE_TAG_EVAL
 
       - name: 
-        run: |
+        run: | 
             chmod +x ci/scripts/build-and-push-lambda-image.sh
-            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha ${{ env.IMAGE_TAG }} --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha $IMAGE_TAG_EVAL --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com

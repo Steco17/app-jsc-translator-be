@@ -3,16 +3,16 @@ on:
   workflow_dispatch:
     inputs:
       IMAGE_TAG:
-        description: 'Translate Image Tag'
+        description: 'Translate Image Tag - YYYYMMDD.HHSS'
         required: false
-        default: "latest"
+        default: 'latest'
   pull_request:
     branches:
       - main
 
 env:
   AWS_REGION: us-east-1
-  IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
+  IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG || 'latest' }}
   # IMAGE_TAG: 20240505.1
 
 jobs:
