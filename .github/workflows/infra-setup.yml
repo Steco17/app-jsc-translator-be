@@ -13,7 +13,6 @@ jobs:
   terraform-release:
     name: "Terraform Release"
     runs-on: ubuntu-latest
-    environment: Test
     env:
       working-directory: ./environments
     steps:
