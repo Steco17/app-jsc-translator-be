@@ -1,4 +1,5 @@
-## Overview
+## JSC Translator
+[![Image Build](https://github.com/Steco17/app-jsc-translator-be/actions/workflows/build.yaml/badge.svg)](https://github.com/Steco17/app-jsc-translator-be/actions/workflows/build.yaml)
 
 Flask Translator App is a simple Flask application that translates text into a custom language using a JSON file with translation rules.
 
