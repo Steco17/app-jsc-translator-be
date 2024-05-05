@@ -1,12 +1,3 @@
-global_lang = [
-    {
-        'name': 'English',
-        'code': 'en'
-    },
-    {
-        'name': 'French',
-        'code': 'fr'
-    }
-]
+global_lang = [{"name": "English", "code": "en"}, {"name": "French", "code": "fr"}]
 
-local_lang = ['Kom', 'Bafut']
+local_lang = ["Kom", "Bafut"]

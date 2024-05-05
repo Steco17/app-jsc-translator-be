@@ -1,4 +1,4 @@
-name: Terraform Release Workflow V2
+name: TF Release
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  AWS_REGION: us-east-2
+  AWS_REGION: us-east-1
   IMAGE_TAG: 20240505.1
 
 jobs:
