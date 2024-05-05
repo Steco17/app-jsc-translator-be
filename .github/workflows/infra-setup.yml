@@ -7,6 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-2
+  IMAGE_TAG: 20240505.1
 
 jobs:
   terraform-release:
@@ -34,7 +35,7 @@ jobs:
       - name: Generate TFVars
         run: |
           chmod +x ci/scripts/generate_tfvars.sh
-          ci/scripts/generate_tfvars.sh test
+          ci/scripts/generate_tfvars.sh test ${{ env.IMAGE_TAG }}
 
       - name: Terraform Plan
         if: ${{ github.event_name == 'pull_request' }}
