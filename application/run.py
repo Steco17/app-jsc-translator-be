@@ -1,3 +1,4 @@
+from glob import escape
 from flask import Flask, request, render_template, jsonify
 import awsgi
 from application.manage_globals.main import translate
@@ -39,8 +40,8 @@ def local_language():
 @app.route('/translate', methods=['POST', 'GET'])
 def intitiate_translation():
         
-    lang_global = request.args.get('globalLang')
-    lang_local = request.args.get('localLang')
-    dataset = request.args.get('dataText')
+    lang_global = escape(request.args.get('globalLang'))
+    lang_local = escape(request.args.get('localLang'))
+    dataset = escape(request.args.get('dataText'))
     
     return translate(lang_global, lang_local, dataset)
