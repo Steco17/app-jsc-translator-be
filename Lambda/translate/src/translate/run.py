@@ -1,7 +1,8 @@
 import awsgi
-from application.library.db_languages import global_lang, local_lang
-from application.manage_globals.main import translate
 from flask import Flask, jsonify, render_template, request
+
+from translate.library.db_languages import global_lang, local_lang
+from translate.manage_globals.main import translate
 
 app = Flask(__name__)
 

@@ -7,6 +7,7 @@ packages = [
     { include = "translate", from = "src" }
 ]
 
+
 [tool.poetry.scripts]
 lambda = "translate.app:handler"
 local = "translate.app:main"
@@ -42,8 +43,21 @@ tqdm = "^4.66.4"
 tzdata = "^2024.1"
 werkzeug = "^3.0.2"
 wheel = "^0.43.0"
+awsgi = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
+
+[[tool.mypy.overrides]]
+module = "awsgi.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "nltk.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pandas.*"
+ignore_missing_imports = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
