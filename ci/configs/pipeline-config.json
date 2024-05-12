@@ -1,0 +1,19 @@
+{
+    "docker_context_directory": "Lambda",
+    "docker_file": "Dockerfile",
+    "apps": {
+        "translate": {
+            "service_name": "translate",
+            "ecr_tag": 20240220.1
+        }
+    },
+    "region": "us-east-1",
+    "terraform_directory": "terraform",
+    "environments": {
+        "test": {
+            "workspaces": [
+                "default"
+            ]
+        }
+    }
+}

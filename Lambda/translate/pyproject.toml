@@ -1,0 +1,64 @@
+[tool.poetry]
+name = "translate"
+version = "0.1.0"
+description = ""
+authors = ["kinfinity <ksupro1@gmail.com>"]
+packages = [
+    { include = "translate", from = "src" }
+]
+
+
+[tool.poetry.scripts]
+lambda = "translate.app:handler"
+local = "translate.app:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+boto3 = "^1.34.46"
+black = "^24.2.0"
+mypy = "^1.8.0"
+isort = "^5.13.2"
+pylint = "^3.0.3"
+pytest = "^8.0.1"
+pytest-cov = "^4.1.0"
+aws-wsgi = "^0.2.7"
+blinker = "^1.8.1"
+click = "^8.1.7"
+colorama = "^0.4.6"
+flask = "^3.0.3"
+itsdangerous = "^2.2.0"
+jinja2 = "^3.1.3"
+joblib = "^1.4.2"
+markupsafe = "^2.1.5"
+nltk = "^3.8.1"
+numpy = "^1.26.4"
+packaging = "^24.0"
+pandas = "^2.2.2"
+python-dateutil = "^2.9.0.post0"
+python-dotenv = "^1.0.1"
+pytz = "^2024.1"
+regex = "^2024.4.28"
+six = "^1.16.0"
+tqdm = "^4.66.4"
+tzdata = "^2024.1"
+werkzeug = "^3.0.2"
+wheel = "^0.43.0"
+awsgi = "^0.0.5"
+
+[tool.poetry.dev-dependencies]
+
+[[tool.mypy.overrides]]
+module = "awsgi.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "nltk.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pandas.*"
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
