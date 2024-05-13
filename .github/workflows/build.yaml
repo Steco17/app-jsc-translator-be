@@ -55,13 +55,11 @@ jobs:
       - name: VERSIONED TAG
         id: get_tags
         run: |
-          
-          echo "TAGS=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')" >> $GITHUB_ENV
+          echo "V_TAG=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')" >> $GITHUB_ENV
 
       - name: Check if commit is tagged
         id: check_tag
         run: |
-          V_TAG=${{ steps.get_tags.outputs.tags }}
           echo "Current commit is tagged with: $V_TAG"
           if [ -n "$V_TAG" ]; then
             echo "::set-output name=tagged::true"

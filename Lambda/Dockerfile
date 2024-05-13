@@ -15,11 +15,14 @@ RUN yum install -y python3 \
 RUN pip install poetry
 
 # Install Python dependencies
-RUN poetry config virtualenvs.create false --local && poetry install --no-interaction 
+RUN poetry config virtualenvs.create false --local && poetry install --no-interaction
 # RUN poetry export --without-hashes --format=requirements.txt > requirements.txt
 # RUN if [ -f "/app/requirements.txt" ]; then \
 #         pip3 install --no-cache-dir -r requirements.txt; \
 #     fi
+
+# https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-deployment.html
+RUN chmod 644 $(find . -type f) && chmod 755 $(find . -type d)
 
 # Run app
 # CMD ["poetry", "run", "local"]      // poetry run local     -> translate.app:main
