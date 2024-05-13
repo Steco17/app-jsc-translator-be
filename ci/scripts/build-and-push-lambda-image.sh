@@ -3,7 +3,7 @@
 set -eu
 
 USAGE="USAGE:
-${0} <lambda-directory> <service-name> <ecr-region> <ecr-registry>  <base-image-tag> <dockerfile>"
+${0} <lambda-directory> <service-name> <ecr-region> <ecr-registry>  <image-tag> <dockerfile>"
 
 if [[ $# -ne 6 ]]; then
     echo "${USAGE}" >&2

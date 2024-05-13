@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       IMAGE_TAG:
-        description: 'Translate Image Tag - YYYYMMDD.HHSS'
+        description: 'Translate Image Tag'
         required: false
         default: 'latest'
   pull_request:

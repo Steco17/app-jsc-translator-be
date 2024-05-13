@@ -15,8 +15,8 @@ RUN yum install -y python3 \
 RUN pip install poetry
 
 # Install Python dependencies
-RUN poetry config virtualenvs.create false && poetry install --no-interaction 
-RUN poetry export --without-hashes --format=requirements.txt > requirements.txt
+RUN poetry config virtualenvs.create false --local && poetry install --no-interaction 
+# RUN poetry export --without-hashes --format=requirements.txt > requirements.txt
 # RUN if [ -f "/app/requirements.txt" ]; then \
 #         pip3 install --no-cache-dir -r requirements.txt; \
 #     fi
