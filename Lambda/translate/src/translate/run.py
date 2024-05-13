@@ -30,7 +30,7 @@ def index():
 
 
 def lambda_handler(event, context):
-    return awsgi.response(app, event, context, base64_content_types={"image/png"})
+    return awsgi.make_response(app, event, context)
 
 
 @app.route("/languages/global", methods=["GET"])

@@ -9,7 +9,7 @@ packages = [
 
 
 [tool.poetry.scripts]
-lambda = "translate.app:handler"
+lambda = "translate.run:lambda_handler"
 local = "translate.app:main"
 
 [tool.poetry.dependencies]
