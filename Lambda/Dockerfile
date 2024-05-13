@@ -1,5 +1,5 @@
 # FROM amazonlinux:latest
-FROM public.ecr.aws/lambda/python:latest
+FROM public.ecr.aws/lambda/python:3.10
 ARG LAMBDA_NAME
 
 # Copy code to container

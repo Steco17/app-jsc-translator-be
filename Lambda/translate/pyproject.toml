@@ -9,7 +9,7 @@ packages = [
 
 
 [tool.poetry.scripts]
-lambda = "translate.run:lambda_handler"
+lambda = "translate.app:lambda_handler"
 local = "translate.app:main"
 
 [tool.poetry.dependencies]
@@ -21,7 +21,6 @@ isort = "^5.13.2"
 pylint = "^3.0.3"
 pytest = "^8.0.1"
 pytest-cov = "^4.1.0"
-aws-wsgi = "^0.2.7"
 blinker = "^1.8.1"
 click = "^8.1.7"
 colorama = "^0.4.6"
@@ -44,6 +43,7 @@ tzdata = "^2024.1"
 werkzeug = "^3.0.2"
 wheel = "^0.43.0"
 awsgi = "^0.0.5"
+serverless-wsgi = "^3.0.3"
 
 [tool.poetry.dev-dependencies]
 
