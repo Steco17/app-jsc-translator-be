@@ -3,7 +3,7 @@ FROM public.ecr.aws/lambda/python:3.10
 ARG LAMBDA_NAME
 
 # Copy code to container
-COPY /${LAMBDA_NAME} ${LAMBDA_TASK_ROOT} 
+COPY /${LAMBDA_NAME} ${LAMBDA_TASK_ROOT}
 # - remove .lock file if copied
 RUN if [ -f "${LAMBDA_TASK_ROOT}/poetry.lock" ]; then rm -r ${LAMBDA_TASK_ROOT}/poetry.lock; fi 
 # setup for amazonlinux to be able to excute

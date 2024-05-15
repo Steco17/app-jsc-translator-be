@@ -56,11 +56,13 @@ jobs:
         id: get_tags
         run: |
           echo "V_TAG=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')" >> $GITHUB_ENV
+          echo "V_TAG=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')"
+          git tag --points-at ${{ github.sha }} --list 'v*.*.*'
 
       - name: Check if commit is tagged
         id: check_tag
         run: |
-          echo "Current commit is tagged with: $V_TAG"
+          echo "Current commit is tagged with: " $V_TAG
           if [ -n "$V_TAG" ]; then
             echo "::set-output name=tagged::true"
           else
