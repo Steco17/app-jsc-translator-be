@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request
-
+from flask_cors import CORS
 from translate.library.db_languages import global_lang, local_lang
 from translate.manage_globals.main import translate
 
@@ -16,6 +16,7 @@ def validate_api_key():
     """
     # Extract the API key from the request headers
     api_key = request.headers.get("Authorization")
+    api_key = request.headers.add("Access-Control-Allow-Origin", "*")
 
     # Check if the API key is provided and matches the expected key
     if not api_key or api_key != f"Bearer {VALID_API_KEYS}":
@@ -29,18 +30,19 @@ def index():
 
 
 @app.route("/languages/global", methods=["GET"])
+@cross_origin()
 def intl_language():
     return global_lang
 
 
 @app.route("/languages/local", methods=["GET"])
+@cross_origin()
 def local_language():
     return local_lang
    
 
 @app.route("/translate", methods=["POST", "GET"])
 def intitiate_translation():
-
     lang_global = request.args.get("globalLang")
     lang_local = request.args.get("localLang")
     dataset = request.args.get("dataText")
