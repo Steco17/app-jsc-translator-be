@@ -1,10 +1,12 @@
 from glob import escape
 from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS
 import awsgi
 from application.manage_globals.main import translate
 from application.library.db_languages import global_lang, local_lang
 
 app = Flask(__name__)
+CORS(app)
 
 # Define valid API keys
 VALID_API_KEYS =  'jsc@20231104'
