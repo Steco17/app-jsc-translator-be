@@ -1,10 +1,8 @@
 from flask import Flask, jsonify, render_template, request
-from flask_cors import CORS
 from translate.library.db_languages import global_lang, local_lang
 from translate.manage_globals.main import translate
 
 app = Flask(__name__)
-CORS(app)
 
 # Define valid API keys
 VALID_API_KEYS = "jsc@20231104"
