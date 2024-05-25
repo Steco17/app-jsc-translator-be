@@ -31,4 +31,4 @@ RUN poetry build
 # Run app
 # CMD ["poetry", "run", "local"]      // poetry run local     -> translate.app:main
 # CMD ["poetry", "run", "lambda"]   // poetry run lambda    -> translate.app:handler
-CMD [ "translate.run.lambda_handler" ]
+CMD [ "translate.app.lambda_handler" ]
