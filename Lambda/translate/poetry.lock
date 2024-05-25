@@ -15,17 +15,6 @@ files = [
 typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.11\""}
 
 [[package]]
-name = "aws-wsgi"
-version = "0.2.7"
-description = "WSGI adapter for AWS API Gateway/Lambda Proxy Integration"
-optional = false
-python-versions = "*"
-files = [
-    {file = "aws-wsgi-0.2.7.tar.gz", hash = "sha256:eb0b00970e80d96b52c0806ceae2ff98ab96c90f67651765755c5236f9e6e50d"},
-    {file = "aws_wsgi-0.2.7-py2.py3-none-any.whl", hash = "sha256:37e16b6a211f251d9f72ab85018c4127a59dc0fc81263c19f312a6a8333f9908"},
-]
-
-[[package]]
 name = "awsgi"
 version = "0.0.5"
 description = "asynchronous wsgi server"
@@ -974,6 +963,20 @@ botocore = ">=1.33.2,<2.0a.0"
 crt = ["botocore[crt] (>=1.33.2,<2.0a.0)"]
 
 [[package]]
+name = "serverless-wsgi"
+version = "3.0.3"
+description = "Amazon AWS API Gateway WSGI wrapper"
+optional = false
+python-versions = ">3.6"
+files = [
+    {file = "serverless-wsgi-3.0.3.tar.gz", hash = "sha256:5b526aa698d9d9332b53ff34d9f978b579f439f8abd530ceb2d183bb1a7d0820"},
+    {file = "serverless_wsgi-3.0.3-py2.py3-none-any.whl", hash = "sha256:6445fc00fb36654ab7546454da9d4ea450e1ff5ae144d1f99d8290ef96831dda"},
+]
+
+[package.dependencies]
+werkzeug = ">2"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -1255,4 +1258,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "34b9ed3f8e481c50370941bf8b8294b81523d58d349c250bf0beadab90e025c8"
+content-hash = "f31b3bfd06fecd06d01cf29b4671e684af0926c6afbc4eafb0cf2fb13239ccc6"

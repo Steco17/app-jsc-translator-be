@@ -1,11 +1,10 @@
-import awsgi
+import serverless_wsgi
 
 from translate.run import app
 
-
-def handler(event, context):
-    return awsgi.response(app, event, context)
-
+def lambda_handler(event, context):
+    return serverless_wsgi.handle_request(app, event, context)
+    # https://pypi.org/project/serverless-wsgi/
 
 def main():
     app.run(debug=True)

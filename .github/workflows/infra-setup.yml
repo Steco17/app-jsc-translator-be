@@ -3,12 +3,16 @@ on:
   workflow_dispatch:
     inputs:
       IMAGE_TAG:
-        description: 'Translate Image Tag - YYYYMMDD.HHSS'
+        description: 'Translate Image Tag'
         required: false
         default: 'latest'
   pull_request:
     branches:
       - main
+    paths:
+      - terraform/**
+      - ci/scripts/generate_tfvars.sh
+      - .github/workflows/infra-setup.yml
 
 env:
   AWS_REGION: us-east-1

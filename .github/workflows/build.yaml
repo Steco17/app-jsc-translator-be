@@ -47,12 +47,39 @@ jobs:
           aws ecr get-login-password --region ${{ env.AWS_REGION }} --profile test | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
   
           
-      - name: Eval TAG
+      - name: Normal TAG
         run: |
             echo "IMAGE_TAG_EVAL=$(date +'%Y%m%d.%H%M')" >> $GITHUB_ENV
             echo $IMAGE_TAG_EVAL
 
-      - name: 
-        run: | 
-            chmod +x ci/scripts/build-and-push-lambda-image.sh
-            python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha $IMAGE_TAG_EVAL --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+      - name: VERSIONED TAG
+        id: get_tags
+        run: |
+          echo "V_TAG=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')" >> $GITHUB_ENV
+          echo "V_TAG=$(git tag --points-at ${{ github.sha }} --list 'v*.*.*')"
+          git tag --points-at ${{ github.sha }} --list 'v*.*.*'
+
+      - name: Check if commit is tagged
+        id: check_tag
+        run: |
+          echo "Current commit is tagged with: " $V_TAG
+          if [ -n "$V_TAG" ]; then
+            echo "::set-output name=tagged::true"
+          else
+            echo "::set-output name=tagged::false"
+          fi
+
+      - name: Build Normal Image
+        if: steps.check_tag.outputs.tagged == 'false'
+        run: |
+          chmod +x ci/scripts/build-and-push-lambda-image.sh
+          python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha $IMAGE_TAG_EVAL --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+
+
+      - name: Build Versioned Image
+        if: steps.check_tag.outputs.tagged == 'true'
+        run: |
+          V_TAG=${{ steps.get_tags.outputs.tags }}
+          echo "Current commit is tagged with: $V_TAG"
+          chmod +x ci/scripts/build-and-push-lambda-image.sh
+          python ci/scripts/build-and-push-all-lambdas.py  --config ci/configs/pipeline-config.json --gitsha $V_TAG --registry ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com

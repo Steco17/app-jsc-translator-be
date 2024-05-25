@@ -1,4 +1,3 @@
-import awsgi
 from flask import Flask, jsonify, render_template, request
 
 from translate.library.db_languages import global_lang, local_lang
@@ -29,10 +28,6 @@ def index():
     return render_template("index.html")
 
 
-def lambda_handler(event, context):
-    return awsgi.response(app, event, context, base64_content_types={"image/png"})
-
-
 @app.route("/languages/global", methods=["GET"])
 def intl_language():
     return global_lang
@@ -41,7 +36,7 @@ def intl_language():
 @app.route("/languages/local", methods=["GET"])
 def local_language():
     return local_lang
-
+   
 
 @app.route("/translate", methods=["POST", "GET"])
 def intitiate_translation():
