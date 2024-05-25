@@ -33,7 +33,7 @@ terraform validate
 terraform workspace list
 terraform workspace select $WORKSPACE
 
-terraform ${TERRAFORM_CMD} -var-file=./variables.tfvars
+terraform ${TERRAFORM_CMD} -var-file=./variables.tfvars -auto-approve
 
 echo "done setting up ${ENV_NAME}/${WORKSPACE}!"
 popd
