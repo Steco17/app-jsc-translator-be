@@ -30,14 +30,12 @@ def index():
 
 @app.route("/languages/global", methods=["GET"])
 def intl_language():
-    client_headers = dict(request.headers)
-    return global_lang, jsonify(client_headers)
+    return global_lang
 
 
 @app.route("/languages/local", methods=["GET"])
 def local_language():
-    client_headers = dict(request.headers)
-    return local_lang , jsonify(client_headers)
+    return local_lang
    
 
 @app.route("/translate", methods=["POST", "GET"])
