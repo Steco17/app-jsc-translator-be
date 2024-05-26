@@ -32,22 +32,9 @@ def intl_language():
     return global_lang
 
 
-@app.route("/languages/local", methods=["GET", 'OPTIONS'])
+@app.route("/languages/local", methods=["GET"])
 def local_language():
-    if request.method == 'OPTIONS':
-        # Handle preflight request
-        headers = {
-            'Access-Control-Allow-Origin': '*',  # Replace with your allowed origins
-            'Access-Control-Allow-Methods': 'OPTIONS, GET, POST, PUT, DELETE',  # Adjust allowed methods
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',  # Adjust allowed headers
-            'Access-Control-Max-Age': '3600'  # Cache preflight response for 1 hour
-        }
-        return ('', 204, headers)
-    elif request.method == 'GET':
-        
-        return local_lang
-    else:
-        return jsonify({'error': 'Method not allowed'}), 405
+    return local_lang
    
 
 @app.route("/translate", methods=["POST", "GET"])
