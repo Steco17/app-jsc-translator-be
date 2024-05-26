@@ -10,6 +10,7 @@ def lambda_handler(event, context):
         "headers": {
             "Access-Control-Allow-Origin": "*",  # Restrict this to domains you trust
             "Access-Control-Allow-Headers": "*",  # Specify only the headers you need to allow
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",  # Specify allowed methods
         },
     }
     # Use serverless_wsgi to handle the request
