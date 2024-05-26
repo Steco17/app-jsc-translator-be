@@ -44,6 +44,7 @@ def local_language():
         }
         return ('', 204, headers)
     elif request.method == 'GET':
+        
         return local_lang
     else:
         return jsonify({'error': 'Method not allowed'}), 405
