@@ -12,7 +12,7 @@ Flask Translator App is a simple Flask application that translates text into a c
 1.  **Clone the repository:**
 
 ```
-   git clone https://https://github.com/Steco17/linear_JSC_translator.git
+   git clone https://github.com/Steco17/app-jsc-translator-be.git
 ```
 
 ## Running the Flask Application

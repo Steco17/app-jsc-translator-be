@@ -32,17 +32,25 @@ def index():
 def lambda_handler(event, context):
     return awsgi.response(app, event, context, base64_content_types={"image/png"})
 
-@app.route('/languages/global', methods=['GET'])
+@app.route('/languages/global', methods=['GET', 'OPTIONS'])
 def intl_language():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
+    
     return global_lang
 
-@app.route('/languages/local', methods=['GET'])
+@app.route('/languages/local', methods=['GET', 'OPTIONS'])
 def local_language():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
+    
     return local_lang
 
-@app.route('/translate', methods=['POST', 'GET'])
+@app.route('/translate', methods=['POST', 'GET', 'OPTIONS'])
 def intitiate_translation():
-        
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
+    
     lang_global = escape(request.args.get('globalLang'))
     lang_local = escape(request.args.get('localLang'))
     dataset = escape(request.args.get('dataText'))
