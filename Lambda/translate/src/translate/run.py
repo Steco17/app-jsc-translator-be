@@ -29,16 +29,22 @@ def index():
 
 @app.route("/languages/global", methods=["GET"])
 def intl_language():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
     return global_lang
 
 
 @app.route("/languages/local", methods=["GET"])
 def local_language():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
     return local_lang
    
 
 @app.route("/translate", methods=["POST", "GET"])
 def intitiate_translation():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'CORS preflight request successful'}), 200
     lang_global = request.args.get("globalLang")
     lang_local = request.args.get("localLang")
     dataset = request.args.get("dataText")
