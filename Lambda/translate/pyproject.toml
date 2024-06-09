@@ -7,7 +7,6 @@ packages = [
     { include = "translate", from = "src" }
 ]
 
-
 [tool.poetry.scripts]
 lambda = "translate.app:lambda_handler"
 local = "translate.app:main"
@@ -44,7 +43,6 @@ werkzeug = "^3.0.2"
 wheel = "^0.43.0"
 awsgi = "^0.0.5"
 serverless-wsgi = "^3.0.3"
-Flask-Cors = "^4.0.1"
 
 [tool.poetry.dev-dependencies]
 
