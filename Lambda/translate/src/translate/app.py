@@ -9,8 +9,9 @@ def lambda_handler(event, context):
         # Modify the CORS settings below to match your specific requirements
         "headers": {
             "Access-Control-Allow-Origin": "*",  # Restrict this to domains you trust
+            "Access-Control-Allow-Credentials" : True,
             "Access-Control-Allow-Headers": "*",  # Specify only the headers you need to allow
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",  # Specify allowed methods
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",  # Specify allowed methods
         },
     }
     # Use serverless_wsgi to handle the request
