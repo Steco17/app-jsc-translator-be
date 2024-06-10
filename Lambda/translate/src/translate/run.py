@@ -8,18 +8,18 @@ app = Flask(__name__)
 VALID_API_KEYS = "jsc@20231104"
 
 
-@app.before_request
-def validate_api_key():
-    """
-    Before each request, this function validates the API key.
-    """
-    # Extract the API key from the request headers
-    api_key = request.headers.get("Authorization")
+# @app.before_request
+# def validate_api_key():
+#     """
+#     Before each request, this function validates the API key.
+#     """
+#     # Extract the API key from the request headers
+#     api_key = request.headers.get("Authorization")
 
-    # Check if the API key is provided and matches the expected key
-    if not api_key or api_key != f"Bearer {VALID_API_KEYS}":
-        # If the API key is missing or incorrect, return a 401 Unauthorized response
-        return jsonify({"error": "Unauthorized No key"}), 401
+#     # Check if the API key is provided and matches the expected key
+#     if not api_key or api_key != f"Bearer {VALID_API_KEYS}":
+#         # If the API key is missing or incorrect, return a 401 Unauthorized response
+#         return jsonify({"error": "Unauthorized No key"}), 401
 
 
 @app.route("/")
