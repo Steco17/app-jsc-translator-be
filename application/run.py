@@ -18,7 +18,7 @@ def validate_api_key():
     """
     # Extract the API key from the request headers
     api_key = request.headers.get('Authorization')
-    api_key = request.headers.add("Access-Control-Allow-Origin", "*")
+    # api_key = request.headers.add("Access-Control-Allow-Origin", "*")
 
     # Check if the API key is provided and matches the expected key
     if not api_key or api_key != f'Bearer {VALID_API_KEYS}':
